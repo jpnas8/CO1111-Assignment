@@ -1,0 +1,12 @@
+header{
+    font-size: x-large;
+    text-align: center;
+    background-color: #90ca90;
+    padding: 3%;
+    font-family: sans-serif;
+}
+body div{
+    padding: 300px;
+    text-align: center;
+    background-color: #db7093;
+}
