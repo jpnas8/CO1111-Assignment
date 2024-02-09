@@ -72,3 +72,19 @@ footer{
     color: purple;
     text-decoration: none;
 }
+div #names {
+    padding: 300px;
+    text-align: center;
+    background-color: lightgray;
+}
+
+#names {
+    text-align: left;
+    margin-top: 20px;
+    font-size: 18px;
+    color: black;
+}
+
+#names p {
+    margin: 5px;
+}
