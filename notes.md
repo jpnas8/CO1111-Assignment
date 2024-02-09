@@ -7,3 +7,8 @@ Update: we held our first meeting today as well, we talked about the project and
 Also, I managed to work on getting all the treasure hunt info using JS (fetch), and Miranda started styling the page as she likes it, it will be her design choices.
        *JP*
 
+
+# Feb 9 2024
+During the labs I was working on a bit of css (gradient background) and steered the course of the project. Added some context in the landing page, created the page for the
+treasure hunt game with a link including style and functionality.
+       *JP*
