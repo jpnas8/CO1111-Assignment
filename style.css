@@ -1,5 +1,5 @@
 header{
-    font-size: x-large;
+    font-size: 1.5em;
     color : white;
     text-align: left;
     background-color: rebeccapurple;
@@ -20,6 +20,17 @@ footer{
     color: white;
     border-radius: 10px;
     margin-top: 400px;
+    display: flex;
+}
+
+.twitter-share-button{
+    padding: 20px;
+}
+
+#logo {
+    float: left;
+    height: 60px;
+    padding: 10px
 }
 
 #names {
@@ -74,15 +85,25 @@ footer{
     color: purple;
     text-decoration: none;
 }
-div #names {
-    padding: 300px;
-    text-align: center;
-    background-color: lightgray;
-}
 
 #names {
     text-align: left;
     margin-top: 20px;
     font-size: 18px;
     color: black;
+}
+
+
+
+@media screen and (max-width: 705px){
+    header{
+        font-size: 75%;
+        transition-duration: 0.1s;
+    }
+    .link{
+        padding: 5px;
+    }
+    body{
+        font-size: 90%;
+    }
 }
