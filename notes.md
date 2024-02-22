@@ -12,3 +12,9 @@ Also, I managed to work on getting all the treasure hunt info using JS (fetch), 
 During the labs I was working on a bit of css (gradient background) and steered the course of the project. Added some context in the landing page, created the page for the
 treasure hunt game with a link including style and functionality.
        *JP*
+
+# Feb 16 2024
+Lab hours. Worked on the lab worksheet this time. Miranda showed me her work, and pushed it into the repository (some startup on the app.html).
+Will continue working soon, but I think we should start having more meetings more frequently and actually start working on the project for good.
+[-> DO THE MANIFEST AND JSON AND JS FOR APPLICATION FROM PROGRESSIVE.HTML]
+       *JP*

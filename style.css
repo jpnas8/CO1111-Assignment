@@ -27,31 +27,33 @@ footer{
     padding: 20px;
 }
 #goal {
-    padding: 20px;
+    padding: 1%;
 }
 #game_explanation {
-    padding: 20px;
+    padding: 1%;
     line-height: 1.5;
 }
 #game_rules {
-    padding: 20px;
+    padding: 1%;
     line-height: 1.5;
-    border-radius: 5px;
+    border-radius: 0.25%;
 }
+
+
 #play_button {
     transition-duration: .5s;
-    padding: 10px;
+    padding: 1.2%;
     border-radius: 5px;
     text-decoration: none;
     color: white;
     background-color: darkred;
-    margin: 20px;
+    margin: 2%;
 }
 
 #play_button:hover {
     transition-duration: .5s;
     background-color: mediumorchid;
-    padding: 20px;
+    padding: 2%;
 }
 
 
