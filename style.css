@@ -1,5 +1,5 @@
 header{
-    font-size: x-large;
+    font-size: 1.5em;
     color : white;
     text-align: left;
     background-color: rebeccapurple;
@@ -20,6 +20,17 @@ footer{
     color: white;
     border-radius: 10px;
     margin-top: 400px;
+    display: flex;
+}
+
+.twitter-share-button{
+    padding: 20px;
+}
+
+#logo {
+    float: left;
+    height: 60px;
+    padding: 10px
 }
 
 #names {
@@ -27,31 +38,33 @@ footer{
     padding: 20px;
 }
 #goal {
-    padding: 20px;
+    padding: 1%;
 }
 #game_explanation {
-    padding: 20px;
+    padding: 1%;
     line-height: 1.5;
 }
 #game_rules {
-    padding: 20px;
+    padding: 1%;
     line-height: 1.5;
-    border-radius: 5px;
+    border-radius: 0.25%;
 }
+
+
 #play_button {
     transition-duration: .5s;
-    padding: 10px;
+    padding: 1.2%;
     border-radius: 5px;
     text-decoration: none;
     color: white;
     background-color: darkred;
-    margin: 20px;
+    margin: 2%;
 }
 
 #play_button:hover {
     transition-duration: .5s;
     background-color: mediumorchid;
-    padding: 20px;
+    padding: 2%;
 }
 
 
@@ -72,15 +85,25 @@ footer{
     color: purple;
     text-decoration: none;
 }
-div #names {
-    padding: 300px;
-    text-align: center;
-    background-color: lightgray;
-}
 
 #names {
     text-align: left;
     margin-top: 20px;
     font-size: 18px;
     color: black;
+}
+
+
+
+@media screen and (max-width: 705px){
+    header{
+        font-size: 75%;
+        transition-duration: 0.1s;
+    }
+    .link{
+        padding: 5px;
+    }
+    body{
+        font-size: 90%;
+    }
 }
