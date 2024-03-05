@@ -86,6 +86,20 @@ footer{
     text-decoration: none;
 }
 
+.THButton{
+    background-color: black;
+    padding: 10px;
+    margin: 5%;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+    font-size: 150%;
+}
+
+#TH{
+    text-align: center;
+}
+
 #names {
     text-align: left;
     margin-top: 20px;
@@ -105,5 +119,8 @@ footer{
     }
     body{
         font-size: 90%;
+    }
+    .THButton{
+        font-size: 100%;
     }
 }
