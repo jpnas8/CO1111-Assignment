@@ -25,14 +25,14 @@ function loadTreasureHunts(){
             const treasureHuntsList = document.getElementById("treasure hunts-list");
             treasureHuntsList.innerHTML = '';
             let data = jsonObject.treasureHunts;
-            data.forEach(treasureHuntsList => {
+            data.forEach(treasureHunt => {
                 /*const listItem = document.createElement('button');
-                listItem.textContent = treasureHuntsList.name;
+                listItem.textContent = treasureHunt.name;
                 listItem.className = "THButton";
                 listItem.type = "button";
                 listItem.innerHTML += '<br>';
                 treasures.appendChild(listItem);*/
-                treasures.innerHTML += '<button class="THButton" type="button">' + treasureHuntsList.name + ' </button>';
+                treasures.innerHTML += `<button onclick="location.href='startTreasureHunt.html?treasureHuntID=${treasureHuntID=treasureHunt.uuid}&name=${treasureHunt.name}'" class="THButton" type="button"> ${treasureHunt.name}</button>`;
                 treasures.innerHTML += '<br>'
             });
         })

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Start treasure hunt</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<header>
+    <h1 id="treasureHuntName"></h1>
+</header>
+
+<script>
+    const treasureHuntNameElement = document.getElementById("treasureHuntName");
+    let params = new URLSearchParams(location.search);
+    let treasureHuntName = params.get("name");
+    let treasureHuntID = params.get("treasureHuntID");
+    let appName = "Group-B2-App";
+    treasureHuntNameElement.innerHTML = treasureHuntName;
+
+</script>
+
+<main>
+    <input type="text" id="playerName" />
+    <input type="button" value="Start" onclick="startTreasureHunt()" />
+</main>
+
+<script>
+    function startTreasureHunt() {
+        const playerName = document.getElementById("playerName").value;
+
+        //TODO - Validate the player name...
+
+        fetch(`https://codecyprus.org/th/api/start?player=${playerName}&app=${appName}&treasure-hunt-id=${treasureHuntID}`)
+            .then(response => response.json())
+            .then(jsonObject => {
+               if (jsonObject.status === "OK") {
+                   //TODO -  store the session ID
+                   location.href = "game.html"; //TODO
+               }
+               else {
+                   alert(jsonObject.errorMessage);
+               }
+            });
+    }
+</script>
+
+</body>
+</html>
