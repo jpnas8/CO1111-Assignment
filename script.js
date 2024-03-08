@@ -2,8 +2,8 @@
 let playerName;
 let teamName;
 let treasures = document.getElementById("TH")
-getInfo();
-function getInfo(){
+loadTreasureHunts();
+/*function getInfo(){
     fetch("https://codecyprus.org/th/api/list")
         .then(response =>response.json())
         .then(jsonObject =>{
@@ -17,4 +17,24 @@ function getInfo(){
 
             }
         });
+}*/
+function loadTreasureHunts(){
+    fetch("https://codecyprus.org/th/api/list")
+        .then(response=>response.json())
+        .then(jsonObject => {
+            const treasureHuntsList = document.getElementById("treasure hunts-list");
+            treasureHuntsList.innerHTML = '';
+            let data = jsonObject.treasureHunts;
+            data.forEach(treasureHuntsList => {
+                /*const listItem = document.createElement('button');
+                listItem.textContent = treasureHuntsList.name;
+                listItem.className = "THButton";
+                listItem.type = "button";
+                listItem.innerHTML += '<br>';
+                treasures.appendChild(listItem);*/
+                treasures.innerHTML += '<button class="THButton" type="button">' + treasureHuntsList.name + ' </button>';
+                treasures.innerHTML += '<br>'
+            });
+        })
+        .catch(error => console.error('Error loading treasure hunts: ', error));
 }
