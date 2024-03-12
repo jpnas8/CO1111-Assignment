@@ -32,3 +32,7 @@ Cookies??
 Google thing????
 }
        *JP*
+
+# Mar 13 2024
+Discussed with the team the structure of the web application and split the work into parts. Also discussed how each individual should procceed with his part on the assignment.
+       *AL*
