@@ -51,7 +51,7 @@ footer{
 }
 
 
-#play_button {
+.playBtn {
     transition-duration: .5s;
     padding: 1.2%;
     border-radius: 5px;
@@ -61,7 +61,7 @@ footer{
     margin: 2%;
 }
 
-#play_button:hover {
+.playBtn:hover {
     transition-duration: .5s;
     background-color: mediumorchid;
     padding: 2%;
