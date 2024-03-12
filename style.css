@@ -67,6 +67,10 @@ footer{
     padding: 2%;
 }
 
+#playerName {
+    height: 50px;
+    border-radius: 35px;
+}
 
 .link{
     transition-duration: 0.5s;
