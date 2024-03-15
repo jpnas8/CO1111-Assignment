@@ -3,16 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <title>Game</title>
-     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <script>
         let params = new URLSearchParams(location.search);
         let const sessionID = params.get("sessionID");
-        fetch(`https://codecyprus.org/th/api/question?session=?{sessionID}`)
-        .then(response => response.json())
-        .then(jsonObject => {
+        let score = 0;
+        loadQuestion (sessionID);
+        
+        void loadQuestion(let sessionID) {
+            fetch(`https://codecyprus.org/th/api/question?session=${sessionID}`)
+            .then(response => response.json())
+            .then(jsonObject => {
+                let status = jsonObject.status;
+                if (status === "OK") {
+                    let isCompleted = jsonObject.completed;
+                    if (!isCompleted) {
+                        let questionText = jsonObject.questionText;
+                        let questionType = jsonObject.questionType;
+                        let canBeSkipped = jsonObject.canBeSkipped;
+                        let requiresLocation = jsonObject.requiresLocation;
+                        let currentQuestionIndex = jsonObject.currentQuestionIndex;
+                    }
+                    else {
+                        //TODO go back to leaderboard
+                    }
+                }
+                else {
+                    alert (jsonObject.errorMessages);
+                }
+            }
         }
+        
+        void skipQuestion(let sessionID, let currentScore)
+        {
+            fetch(`https://codecyprus.org/th/api/skip?session=${sessionID}`)
+            .then(response => response.json())
+            .then(jsonObject => {
+                currentScore += jsonObject.scoreAdjustment;;
+            }
+        }
+
+        void answerQuestion(let sessionID, let answer)
+        {
+            fetch(`https://codecyprus.org/th/api/answer?session=${sessionID}&answer=${answer}`) 
+            .then(response => response.json())
+            .then(jsonObject => {
+                if (jsonObject.status === "OK") {
+                    score += jsonObject.scoreAdjustment;
+                    alert (jsonObject.message);
+                }
+                else {
+                    alert (jsonObject.errorMessages);
+                    //Redirect to leaderboard
+                }
+            }
+        }
+
+        
     </script>
 
 </body>
