@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Game</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
     <script>
@@ -90,6 +92,21 @@
         }
         
     </script>
+ 
+<body>
+<div id="question-container">
+  <div id="question">
+    <button id="leaderboard-button" class="link">Leaderboard</button>
+    <h2>Question:</h2>
+    <div id="score-container">
+      <h2>Score: <span id="score">0</span></h2>
+  </div>
 
+</div>
+  <div id="options-container"></div>
+  <button id="skip-question" class="skipBtn">Skip</button>
+  <button id="submit-answer" class="playBtn">Submit</button>
+
+</div>
 </body>
 </html>
