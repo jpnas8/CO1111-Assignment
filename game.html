@@ -1,19 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Game</title>
-     <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
     <script>
         let params = new URLSearchParams(location.search);
         let const sessionID = params.get("sessionID");
-        fetch(`https://codecyprus.org/th/api/question?session=?{sessionID}`)
-        .then(response => response.json())
-        .then(jsonObject => {
-        }
-    </script>
+        let score = 0;
+        loadQuestion (sessionID);
+        
+        void loadQuestion(let sessionID) {
+            fetch(`https://codecyprus.org/th/api/question?session=${sessionID}`)
+            .then(response => response.json())
+            .then(jsonObject => {
+                let status = jsonObject.status;
+                if (status === "OK") {
+                    let isCompleted = jsonObject.completed;
+                    if (!isCompleted) {
+                        let questionText = jsonObject.questionText;
+                        let questionType = jsonObject.questionType;
+                        let canBeSkipped = jsonObject.canBeSkipped;
+                        let requiresLocation = jsonObject.requiresLocation;
+                        let currentQuestionIndex = jsonObject.currentQuestionIndex;
 
+                        let questionHTML = document.getElementById("question");
+                        questionHTML.innerHTML = questionText;
+                    }
+                    else {
+                        //TODO go back to leaderboard
+                    }
+                }
+                else {
+                    alert (jsonObject.errorMessages);
+                }
+            }
+        }
+        
+        void skipQuestion(let sessionID, let currentScore)
+        {
+            fetch(`https://codecyprus.org/th/api/skip?session=${sessionID}`)
+            .then(response => response.json())
+            .then(jsonObject => {
+                if (jsonObject.status === "OK") 
+                {
+                    alert (jsonObject.message);
+                    loadQuestion(sessionID);
+                }
+                else 
+                {
+                    alert (jsonObject.errorMessages);
+                }
+            }
+        }
+
+        void answerQuestion(let sessionID, let answer)
+        {
+            fetch(`https://codecyprus.org/th/api/answer?session=${sessionID}&answer=${answer}`) 
+            .then(response => response.json())
+            .then(jsonObject => {
+                if (jsonObject.status === "OK") {
+                    score += jsonObject.scoreAdjustment;
+                    alert (jsonObject.message);
+                    loadQuestion(sessionID);
+                }
+                else {
+                    alert (jsonObject.errorMessages);
+                    //Redirect to leaderboard
+                }
+            }
+        }
+
+        void getScore(let sessionID) 
+        {
+            fetch(`https://codecyprus.org/th/api/score?session=${sessionID}`) 
+            .then(response => response.json())
+            .then(jsonObject => {
+                if (jsonObject.status === "OK") {
+                    let score = jsonObject.score;
+                    let scoreHTML = document.getElementById("score");
+                    scoreHTML.innerHTML = score;
+                }
+                else {
+                    alert (jsonObject.errorMessages);
+                    //Redirect to leaderboard
+                }
+        }
+        
+    </script>
+ 
+
+<div id="question-container">
+  <div id="question">
+    <button id="leaderboard-button" class="link">Leaderboard</button>
+    <h2>Question:</h2>
+    <div id="score-container">
+      <h2>Score: <span id="score">0</span></h2>
+  </div>
+
+</div>
+  <div id="options-container"></div>
+  <button id="skip-question" class="skipBtn">Skip</button>
+  <button id="submit-answer" class="playBtn">Submit</button>
+
+</div>
 </body>
 </html>
