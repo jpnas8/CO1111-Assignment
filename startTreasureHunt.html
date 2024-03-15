@@ -38,8 +38,9 @@
             .then(response => response.json())
             .then(jsonObject => {
                if (jsonObject.status === "OK") {
-                   //TODO -  store the session ID
-                   location.href = "game.html"; //TODO
+                   const sessionID = jsonObject.session;
+                   const numQuestions = jsonObject.numOfQuestions;
+                   location.href = "game.html?sessionID=${sessionID}"; //TODO
                }
                else {
                    alert(jsonObject.errorMessages);
