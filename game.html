@@ -5,6 +5,14 @@
     <title>Game</title>
 </head>
 <body>
+    <script>
+        let params = new URLSearchParams(location.search);
+        let const sessionID = params.get("sessionID");
+        fetch(`https://codecyprus.org/th/api/question?session=?{sessionID}`)
+        .then(response => response.json())
+        .then(jsonObject => {
+        }
+    </script>
 
 </body>
 </html>
