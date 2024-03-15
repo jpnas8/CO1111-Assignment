@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>HTML5 Boilerplate</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Application</title>
   <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
-
 <body>
-  <h1>Page Title</h1>
-  <script src="scripts.js"></script>
+<div id="question-container">
+  <h2 id="question">Question:</h2>
+  <div id="options-container"></div>
+  <button id="submit-answer">Submit Answer</button>
+  <button id="skip-question">Skip Question</button>
+</div>
+<div id="score-container">
+  <h2>Score: <span id="score">0</span></h2>
+</div>
+<div id="leaderboard-container">
+  <h2>Leaderboard</h2>
+  <ol id="leaderboard"></ol>
+</div>
 </body>
-
 </html>
