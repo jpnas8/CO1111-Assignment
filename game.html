@@ -25,6 +25,9 @@
                         let canBeSkipped = jsonObject.canBeSkipped;
                         let requiresLocation = jsonObject.requiresLocation;
                         let currentQuestionIndex = jsonObject.currentQuestionIndex;
+
+                        let questionHTML = document.getElementById("question");
+                        questionHTML.innerHTML = questionText;
                     }
                     else {
                         //TODO go back to leaderboard
@@ -41,7 +44,15 @@
             fetch(`https://codecyprus.org/th/api/skip?session=${sessionID}`)
             .then(response => response.json())
             .then(jsonObject => {
-                currentScore += jsonObject.scoreAdjustment;;
+                if (jsonObject.status === "OK") 
+                {
+                    alert (jsonObject.message);
+                    loadQuestion(sessionID);
+                }
+                else 
+                {
+                    alert (jsonObject.errorMessages);
+                }
             }
         }
 
@@ -53,6 +64,7 @@
                 if (jsonObject.status === "OK") {
                     score += jsonObject.scoreAdjustment;
                     alert (jsonObject.message);
+                    loadQuestion(sessionID);
                 }
                 else {
                     alert (jsonObject.errorMessages);
@@ -61,6 +73,21 @@
             }
         }
 
+        void getScore(let sessionID) 
+        {
+            fetch(`https://codecyprus.org/th/api/score?session=${sessionID}`) 
+            .then(response => response.json())
+            .then(jsonObject => {
+                if (jsonObject.status === "OK") {
+                    let score = jsonObject.score;
+                    let scoreHTML = document.getElementById("score");
+                    scoreHTML.innerHTML = score;
+                }
+                else {
+                    alert (jsonObject.errorMessages);
+                    //Redirect to leaderboard
+                }
+        }
         
     </script>
 
