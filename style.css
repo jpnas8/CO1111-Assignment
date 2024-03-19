@@ -127,7 +127,16 @@ footer{
     color: black;
 }
 
+#question {
+    display: flex;
+    margin: 2%;
+    transition-duration: .5s;
+    font-size : 20px;
+    justify-content: space-between;
+    background-color: darkviolet;
 
+    padding: 1%;
+}
 
 @media screen and (max-width: 705px){
     header{
