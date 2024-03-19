@@ -22,7 +22,7 @@ function loadTreasureHunts(){
     fetch("https://codecyprus.org/th/api/list")
         .then(response=>response.json())
         .then(jsonObject => {
-            const treasureHuntsList = document.getElementById("treasure hunts-list");
+            var treasureHuntsList = document.getElementById("treasure hunts-list");
             treasureHuntsList.innerHTML = '';
             let data = jsonObject.treasureHunts;
             data.forEach(treasureHunt => {
