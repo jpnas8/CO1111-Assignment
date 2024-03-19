@@ -8,13 +8,30 @@
   <!-- <script src="script.js" defer></script> -->
 </head>
 <body>
+
+<div id="question-container">
+  <div id="question">
+    <button id="leaderboard-button" class="link">Leaderboard</button>
+    <h2 id="questionHeader">Question </h2>
+    <div id="score-container">
+      <h2>Score: <span id="score">0</span></h2>
+    </div>
+  </div>
+</div>
+  <div id="questionDiv"></div>
+<form onsubmit="answerQuestion()">
+  <input id="questionBox" name="userAnswer">
+  <div id="options-container">
+    <button id="skip-question" class="playBtn black" type="submit">Skip</button>
+    <button id="submit-answer" class="playBtn" type="submit">Submit</button>
+  </div>
+</form>
+  
     <script>
         let params = new URLSearchParams(location.search);
         let sessionID = params.get("sessionID");
-        let score = 0;
-        loadQuestion (sessionID);
-        
-        void loadQuestion(let sessionID) {
+      
+        void loadQuestion() {
             fetch("https://codecyprus.org/th/api/question?session="+ sessionID)
             .then(response => response.json())
             .then(jsonObject => {
@@ -46,7 +63,7 @@
             }
         }
         
-        void skipQuestion(let sessionID, let currentScore)
+        void skipQuestion()
         {
             fetch("https://codecyprus.org/th/api/skip?session=" +sessionID)
             .then(response => response.json())
@@ -63,8 +80,9 @@
             }
         }
 
-        void answerQuestion(let sessionID, let answer)
+        void answerQuestion()
         {
+          let answer = document.getElementById("questionBox").value;
             fetch("https://codecyprus.org/th/api/answer?session=" + sessionID + "&answer=" + answer) 
             .then(response => response.json())
             .then(jsonObject => {
@@ -80,7 +98,7 @@
             }
         }
 
-        void getScore(let sessionID) 
+        void getScore() 
         {
             fetch("https://codecyprus.org/th/api/score?session=" + sessionID) 
             .then(response => response.json())
@@ -95,26 +113,9 @@
                     //Redirect to leaderboard
                 }
         }
+
+        loadQuestion ();
         
     </script>
- 
-
-<div id="question-container">
-  <div id="question">
-    <button id="leaderboard-button" class="link">Leaderboard</button>
-    <h2 id="questionHeader">Question </h2>
-    <div id="score-container">
-      <h2>Score: <span id="score">0</span></h2>
-    </div>
-  </div>
-</div>
-  <div id="questionDiv"></div>
-<form>
-  <input id="questionBox" name="userAnswer">
-  <div id="options-container">
-    <button id="skip-question" class="playBtn black" type="submit">Skip</button>
-    <button id="submit-answer" class="playBtn" type="submit">Submit</button>
-  </div>
-</form>
 </body>
 </html>
