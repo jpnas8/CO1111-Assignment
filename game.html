@@ -33,6 +33,8 @@
                         questionHeaderHTML.innerHTML += currentQuestionIndex + ":";
                         let questionHTML = document.getElementById("questionDiv");
                         questionHTML.innerHTML = questionText;
+                        let questionBox = document.getElementById("questionBox");
+                        questionBox.setAttribute("type", questionType)
                     }
                     else {
                         //TODO go back to leaderboard
@@ -106,10 +108,10 @@
   </div>
 <div id="questionDiv"></div>
 </div>
-  <div id="options-container"></div>
-  <button id="skip-question" class="playBtn black">Skip</button>
-  <button id="submit-answer" class="playBtn">Submit</button>
-
-</div>
+<form id="options-container"></div>
+  <input id="questionBox" name="userAnswer">
+  <button id="skip-question" class="playBtn black" type="submit">Skip</button>
+  <button id="submit-answer" class="playBtn" type="submit">Submit</button>
+</form>
 </body>
 </html>
