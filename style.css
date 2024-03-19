@@ -143,9 +143,10 @@ footer{
 
 #questionBox {
     width: 75%;
-    height: 100px;
+    height: 50px;
     font-size: 20px;
     border-radius: 50px;
+    padding: 15px; 
     margin: 0 auto;
 }
 
