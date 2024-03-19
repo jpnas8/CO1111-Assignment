@@ -28,7 +28,10 @@
                         let requiresLocation = jsonObject.requiresLocation;
                         let currentQuestionIndex = jsonObject.currentQuestionIndex;
 
-                        let questionHTML = document.getElementById("question");
+                        currentQuestionIndex++;
+                        let questionHeaderHTML = document.getElementById("questionHeader");
+                        questionHeaderHTML.innerHTML += currentQuestionIndex + ":";
+                        let questionHTML = document.getElementById("questionDiv");
                         questionHTML.innerHTML = questionText;
                     }
                     else {
@@ -97,11 +100,11 @@
 <div id="question-container">
   <div id="question">
     <button id="leaderboard-button" class="link">Leaderboard</button>
-    <h2>Question:</h2>
+    <h2 id="questionHeader">Question </h2>
     <div id="score-container">
       <h2>Score: <span id="score">0</span></h2>
   </div>
-
+<div id="questionDiv"></div>
 </div>
   <div id="options-container"></div>
   <button id="skip-question" class="skipBtn">Skip</button>
