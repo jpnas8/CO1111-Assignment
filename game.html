@@ -15,7 +15,7 @@
         loadQuestion (sessionID);
         
         void loadQuestion(let sessionID) {
-            fetch(`https://codecyprus.org/th/api/question?session=${sessionID}`)
+            fetch("https://codecyprus.org/th/api/question?session="+ sessionID)
             .then(response => response.json())
             .then(jsonObject => {
                 let status = jsonObject.status;
@@ -48,7 +48,7 @@
         
         void skipQuestion(let sessionID, let currentScore)
         {
-            fetch(`https://codecyprus.org/th/api/skip?session=${sessionID}`)
+            fetch("https://codecyprus.org/th/api/skip?session=" +sessionID)
             .then(response => response.json())
             .then(jsonObject => {
                 if (jsonObject.status === "OK") 
@@ -65,7 +65,7 @@
 
         void answerQuestion(let sessionID, let answer)
         {
-            fetch(`https://codecyprus.org/th/api/answer?session=${sessionID}&answer=${answer}`) 
+            fetch("https://codecyprus.org/th/api/answer?session=" + sessionID + "&answer=" + answer) 
             .then(response => response.json())
             .then(jsonObject => {
                 if (jsonObject.status === "OK") {
@@ -82,7 +82,7 @@
 
         void getScore(let sessionID) 
         {
-            fetch(`https://codecyprus.org/th/api/score?session=${sessionID}`) 
+            fetch("https://codecyprus.org/th/api/score?session=" + sessionID) 
             .then(response => response.json())
             .then(jsonObject => {
                 if (jsonObject.status === "OK") {
