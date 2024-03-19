@@ -34,13 +34,13 @@
 
         //TODO - Validate the player name...
 
-        fetch(`https://codecyprus.org/th/api/start?player=${playerName}&app=${appName}&treasure-hunt-id=${treasureHuntID}`)
+        fetch("https://codecyprus.org/th/api/start?player=" + playerName + "&app=" + appName + "&treasure-hunt-id=" + treasureHuntID)
             .then(response => response.json())
             .then(jsonObject => {
                if (jsonObject.status === "OK") {
                    const sessionID = jsonObject.session;
                    const numQuestions = jsonObject.numOfQuestions;
-                   location.href = "game.html?sessionID=${sessionID}"; //TODO
+                   location.href = "game.html?sessionID=" + sessionID; 
                }
                else {
                    alert(jsonObject.errorMessages);
