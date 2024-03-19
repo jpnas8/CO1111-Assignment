@@ -67,6 +67,10 @@ footer{
     padding: 2%;
 }
 
+#skip-question {
+    background-color: black;
+}
+
 #playerName {
     font-size: 18px;
     width: 400px;
