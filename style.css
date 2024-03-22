@@ -20,6 +20,9 @@ body{
     color: white;
     font-family: sans-serif;
 }
+#gamefooter{
+    background: linear-gradient(30deg, #CBA2C8 0%, #7C4A7C 50%, #AD7FAD 100%);
+}
 footer{
     background-color: #702070;
     color: white;
