@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Game</title>
   <link rel="stylesheet" href="style.css">
-  <!-- <script src="script.js" defer></script> -->
 </head>
 <body>
 
@@ -19,13 +18,15 @@
   </div>
 </div>
   <div id="questionDiv"></div>
-<form onsubmit="answerQuestion()">
+<div id="UI">
   <input id="questionBox" name="userAnswer">
   <div id="options-container">
-    <button id="skip-question" class="playBtn black" type="submit">Skip</button>
-    <button id="submit-answer" class="playBtn" type="submit">Submit</button>
+    <button id="skip-question" class="playBtn black" onclick="skipQuestion()">Skip</button>
+    <button id="submit-answer" class="playBtn" onclick="answerQuestion()">Submit</button>
   </div>
-</form>
+</div>
+
+ 
   
     <script>
         let params = new URLSearchParams(location.search);
@@ -47,7 +48,7 @@
 
                         currentQuestionIndex++;
                         let questionHeaderHTML = document.getElementById("questionHeader");
-                        questionHeaderHTML.innerHTML += currentQuestionIndex + ":";
+                        questionHeaderHTML.innerHTML = "Question " + currentQuestionIndex + ":";
                         let questionHTML = document.getElementById("questionDiv");
                         questionHTML.innerHTML = questionText;
                         let questionBox = document.getElementById("questionBox");
@@ -71,7 +72,7 @@
                 if (jsonObject.status === "OK") 
                 {
                     alert (jsonObject.message);
-                    loadQuestion(sessionID);
+                    loadQuestion();
                 }
                 else 
                 {

@@ -27,6 +27,12 @@ footer{
     padding: 20px;
 }
 
+#UI {
+    display: flex;
+    margin: 0 auto;
+    flex-direction: column;
+}
+
 #logo {
     float: left;
     height: 60px;
