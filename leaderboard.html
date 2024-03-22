@@ -28,9 +28,8 @@
   let params = new URLSearchParams(location.search);
   let sessionID = params.get("sessionID");
   let limit = params.get("limit");
-  console.log(limit);
 
-  fetch("https://codecyprus.org/th/api/leaderboard?session=" + sessionID + "&sorted")
+  fetch("https://codecyprus.org/th/api/leaderboard?session=" + sessionID + "&sorted" + "&limit=" + limit)
     .then(response => response.json())
     .then(jsonObject => {
       if (jsonObject.status === "OK") {
