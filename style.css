@@ -1,7 +1,7 @@
 
 
 html{
-    height: 100%;
+    height: auto;
 }
 
 header{
@@ -17,6 +17,11 @@ header{
 }
 body{
     background: linear-gradient(30deg, rebeccapurple 0%, darkslateblue 50%, black 100%);
+    color: white;
+    font-family: sans-serif;
+}
+#gamesbody{
+    background: linear-gradient(30deg, #AD7FAD 0%, #7C4A7C 50%, #CBA2C8 100%);
     color: white;
     font-family: sans-serif;
 }
@@ -145,7 +150,7 @@ footer{
     transition-duration: .5s;
     font-size : 20px;
     justify-content: space-between;
-    background-color: darkviolet;
+    background-color: #7C4A7C;
     padding: 1%;
 }
 
@@ -194,6 +199,26 @@ form {
     padding: 10px;
     font-size: 150%;
     margin-bottom: 2%;
+}
+
+#leaderboardContainer {
+    display: flex;
+    margin: 2%;
+    transition-duration: .5s;
+    font-size : 20px;
+    justify-content: center;
+    background-color: darkviolet;
+    padding: 1%;
+}
+
+#leaderboardTable {
+    width: 100%;
+    table-layout:fixed;
+    border: thin solid black;
+}
+
+#leaderboardTable tr{
+    border: thin solid black;
 }
 
 #leaderboardContainer {
