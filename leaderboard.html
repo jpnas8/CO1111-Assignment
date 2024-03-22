@@ -11,6 +11,12 @@
     <h2 id="leaderboardHeader"></h2>
   </div>
 
+  <div id="leaderboardButtons">
+    <button name="sorted" onclick="updateLeaderboard(sorted, false)">Sort</button>
+    <label>Max Rows: </label><input id="limit" type="number">
+    <button onclick="updateLeaderboard(limit, limit.value)">Update</button>
+  </div>
+
   <div id="leaderboard-table">
     <table id="leaderboardTable"><tr><th>Player</th><th>Score</th><th>Time</th></tr>
     
@@ -21,8 +27,9 @@
 <script>
   let params = new URLSearchParams(location.search);
   let sessionID = params.get("sessionID");
+  let limit = params.get("limit");
 
-  fetch("https://codecyprus.org/th/api/leaderboard?session=" + sessionID + "&sorted")
+  fetch("https://codecyprus.org/th/api/leaderboard?session=" + sessionID + "&sorted" + "&limit=" + limit)
     .then(response => response.json())
     .then(jsonObject => {
       if (jsonObject.status === "OK") {
@@ -48,15 +55,16 @@
           column2.innerText = score
           column2.innerText = time
         }
-          
-        //   div.innerHTML += "<tr><td>"+player +"</td><td>"+score +"</td><td>" + time +"</td></tr>";
-        // }
-        // div.innerHTML += "</table>";
       }
        else {
          alert(jsonObject.errorMessages);
       }
     })
+
+    function updateLeaderboard(key, value) {
+      params.append(key, value);
+      location.reload();
+    }
 
 </script>
 
