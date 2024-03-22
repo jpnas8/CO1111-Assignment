@@ -5,33 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Game</title>
   <link rel="stylesheet" href="style.css">
-  <!-- <script src="script.js" defer></script> -->
 </head>
 <body>
 
 <div id="question-container">
   <div id="question">
-    <button id="leaderboard-button" class="link">Leaderboard</button>
+    <button id="leaderboard-button" class="link" onclick="getLeaderboard()">Leaderboard</button>
     <h2 id="questionHeader">Question </h2>
     <div id="score-container">
       <h2>Score: <span id="score">0</span></h2>
     </div>
   </div>
 </div>
+
   <div id="questionDiv"></div>
-<form onsubmit="answerQuestion()">
+
+<div id="UI">
   <input id="questionBox" name="userAnswer">
   <div id="options-container">
-    <button id="skip-question" class="playBtn black" type="submit">Skip</button>
-    <button id="submit-answer" class="playBtn" type="submit">Submit</button>
+    <button id="skip-question" class="playBtn black" onclick="skipQuestion()">Skip</button>
+    <button id="submit-answer" class="playBtn" onclick="answerQuestion()">Submit</button>
   </div>
-</form>
+</div>
+
+ 
   
     <script>
         let params = new URLSearchParams(location.search);
         let sessionID = params.get("sessionID");
       
-        void loadQuestion() {
+        function loadQuestion() {
             fetch("https://codecyprus.org/th/api/question?session="+ sessionID)
             .then(response => response.json())
             .then(jsonObject => {
@@ -39,6 +42,9 @@
                 if (status === "OK") {
                     let isCompleted = jsonObject.completed;
                     if (!isCompleted) {
+                        let UI = document.getElementById("UI");
+                        UI.style.visibility = "visible";
+
                         let questionText = jsonObject.questionText;
                         let questionType = jsonObject.questionType;
                         let canBeSkipped = jsonObject.canBeSkipped;
@@ -47,14 +53,18 @@
 
                         currentQuestionIndex++;
                         let questionHeaderHTML = document.getElementById("questionHeader");
-                        questionHeaderHTML.innerHTML += currentQuestionIndex + ":";
+                        questionHeaderHTML.innerHTML = "Question " + currentQuestionIndex + ":";
                         let questionHTML = document.getElementById("questionDiv");
                         questionHTML.innerHTML = questionText;
                         let questionBox = document.getElementById("questionBox");
-                        questionBox.setAttribute("type", questionType)
+                        questionBox.setAttribute("type", questionType);
+                        questionBox.value = "";
+
+                        getScore();
                     }
                     else {
-                        //TODO go back to leaderboard
+                        getLeaderboard();
+
                     }
                 }
                 else {
@@ -63,7 +73,7 @@
             })
         }
         
-        void skipQuestion()
+        function skipQuestion()
         {
             fetch("https://codecyprus.org/th/api/skip?session=" +sessionID)
             .then(response => response.json())
@@ -71,7 +81,7 @@
                 if (jsonObject.status === "OK") 
                 {
                     alert (jsonObject.message);
-                    loadQuestion(sessionID);
+                    loadQuestion();
                 }
                 else 
                 {
@@ -80,7 +90,7 @@
             })
         }
 
-        void answerQuestion()
+        function answerQuestion()
         {
           let answer = document.getElementById("questionBox").value;
             fetch("https://codecyprus.org/th/api/answer?session=" + sessionID + "&answer=" + answer) 
@@ -93,12 +103,12 @@
                 }
                 else {
                     alert (jsonObject.errorMessages);
-                    //Redirect to leaderboard
+                    getLeaderboard();
                 }
             })
         }
 
-        void getScore() 
+        function getScore()
         {
             fetch("https://codecyprus.org/th/api/score?session=" + sessionID) 
             .then(response => response.json())
@@ -110,12 +120,38 @@
                 }
                 else {
                     alert (jsonObject.errorMessages);
-                    //Redirect to leaderboard
+                    getLeaderboard();
                 }
             })
         }
 
-        loadQuestion ();
+        function getLeaderboard() 
+        {
+            fetch("https://codecyprus.org/th/api/leaderboard?session=" + sessionID + "&sorted")
+            .then(response => response.json())
+            .then(jsonObject => {
+                if (jsonObject.status === "OK") {
+                    let UI = document.getElementById("UI");
+                    UI.style.visibility = "hidden";
+
+                    let div = document.getElementById("questionDiv");
+                    div.innerHTML = "<table><tr><th>Player</th><th>Score</th><th>Time</th></tr>";
+                    
+                    for (let i = 0; i < jsonObject.numOfPlayers; i++) {
+                        let player = jsonObject.leaderboard[i].player;
+                        let score = jsonObject.leaderboard[i].score;
+                        let time = jsonObject.leaderboard[i].completionTime;
+                        div.innerHTML += "<tr><td>"+player +"</td><td>"+score +"</td><td>" + time +"</td></tr>";
+                    }
+                    div.innerHTML += "</table>";
+                }
+                else {
+                    alert(jsonObject.errorMessages);
+                }
+            })
+        }
+
+        loadQuestion();
         
     </script>
 </body>
