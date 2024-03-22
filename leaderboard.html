@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaderboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="leaderboardContainer">
+    <h2 id="leaderboardHeader"></h2>
+  </div>
+
+  <div id="leaderboard-table">
+    <table id="leaderboardTable"><tr><th>Player</th><th>Score</th><th>Time</th></tr>
+    
+    </table>
+
+  </div>
+
+<script>
+  let params = new URLSearchParams(location.search);
+  let sessionID = params.get("sessionID");
+
+  fetch("https://codecyprus.org/th/api/leaderboard?session=" + sessionID + "&sorted")
+    .then(response => response.json())
+    .then(jsonObject => {
+      if (jsonObject.status === "OK") {
+        let header = document.getElementById("leaderboardHeader");
+        header.innerHTML = jsonObject.treasureHuntName;
+        header.innerHTML += " | Leaderboard";
+
+        let div = document.getElementById("leaderboard-table");
+        let table = document.getElementById("leaderboardTable");
+        
+        for (let i = 0; i < jsonObject.numOfPlayers; i++) {
+          let player = jsonObject.leaderboard[i].player;
+          let score = jsonObject.leaderboard[i].score;
+          let time = jsonObject.leaderboard[i].completionTime;
+
+          let currentRow = table.insertRow(-1);
+
+          let column1 = currentRow.insertCell(0);
+          let column2 = currentRow.insertCell(1);
+          let column3 = currentRow.insertCell(2);
+      
+          column1.innerText = player
+          column2.innerText = score
+          column2.innerText = time
+        }
+          
+        //   div.innerHTML += "<tr><td>"+player +"</td><td>"+score +"</td><td>" + time +"</td></tr>";
+        // }
+        // div.innerHTML += "</table>";
+      }
+       else {
+         alert(jsonObject.errorMessages);
+      }
+    })
+
+</script>
+
+</body>
+</html>
