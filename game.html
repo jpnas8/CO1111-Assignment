@@ -163,7 +163,7 @@
 
         function getLeaderboard() 
         {
-            fetch("https://codecyprus.org/th/api/leaderboard?session=" + sessionID + "&sorted")
+            /*fetch("https://codecyprus.org/th/api/leaderboard?session=" + sessionID + "&sorted")
             .then(response => response.json())
             .then(jsonObject => {
                 if (jsonObject.status === "OK") {
@@ -184,7 +184,8 @@
                 else {
                     alert(jsonObject.errorMessages);
                 }
-            })
+            })*/
+          window.location.href = 'leaderboard.html?sessionID=' + sessionID;
         }
 
         function answerA(){
