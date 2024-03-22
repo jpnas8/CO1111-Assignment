@@ -31,7 +31,7 @@
         let params = new URLSearchParams(location.search);
         let sessionID = params.get("sessionID");
       
-        void loadQuestion() {
+        function loadQuestion() {
             fetch("https://codecyprus.org/th/api/question?session="+ sessionID)
             .then(response => response.json())
             .then(jsonObject => {
@@ -63,7 +63,7 @@
             })
         }
         
-        void skipQuestion()
+        function skipQuestion()
         {
             fetch("https://codecyprus.org/th/api/skip?session=" +sessionID)
             .then(response => response.json())
@@ -80,7 +80,7 @@
             })
         }
 
-        void answerQuestion()
+        function answerQuestion()
         {
           let answer = document.getElementById("questionBox").value;
             fetch("https://codecyprus.org/th/api/answer?session=" + sessionID + "&answer=" + answer) 
@@ -98,7 +98,7 @@
             })
         }
 
-        void getScore() 
+        function getScore()
         {
             fetch("https://codecyprus.org/th/api/score?session=" + sessionID) 
             .then(response => response.json())
@@ -115,7 +115,7 @@
             })
         }
 
-        loadQuestion ();
+        loadQuestion();
         
     </script>
 </body>
