@@ -6,7 +6,7 @@
   <title>Game</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body id="gameBody">
 
 <div id="question-container">
   <div id="question">
@@ -21,10 +21,12 @@
   <div id="questionDiv"></div>
 
 <div id="UI">
-  <input id="questionBox" name="userAnswer">
+  <div id="answerBox">
+    <!--<input id="questionBox" name="userAnswer">-->
+  </div>
   <div id="options-container">
-    <button id="skip-question" class="playBtn black" onclick="skipQuestion()">Skip</button>
-    <button id="submit-answer" class="playBtn" onclick="answerQuestion()">Submit</button>
+    <!--<button id="skip-question" class="playBtn black" onclick="skipQuestion()">Skip</button>
+    <button id="submit-answer" class="playBtn" onclick="answerQuestion()">Submit</button>-->
   </div>
 </div>
 
@@ -33,6 +35,8 @@
     <script>
         let params = new URLSearchParams(location.search);
         let sessionID = params.get("sessionID");
+        let ui = document.getElementById("options-container");
+        let answerBox = document.getElementById("answerBox");
       
         function loadQuestion() {
             fetch("https://codecyprus.org/th/api/question?session="+ sessionID)
@@ -53,9 +57,34 @@
                         questionHeaderHTML.innerHTML = "Question " + currentQuestionIndex + ":";
                         let questionHTML = document.getElementById("questionDiv");
                         questionHTML.innerHTML = questionText;
+
+
                         let questionBox = document.getElementById("questionBox");
-                        questionBox.setAttribute("type", questionType);
-                        questionBox.value = "";
+                        if (questionType === "INTEGER") {
+                          //TODO this part doesnt take only ONE digit
+                          answerBox.innerHTML += '<input id="questionBox" name="userAnswer" type="number" min="-9" max="9" maxlength="1">';
+                          ui.innerHTML += '<button id="skip-question" class="playBtn Black" onClick="skipQuestion()">Skip</button>';
+                          ui.innerHTML += '<button id="submit-answer" class="playBtn" onClick="answerQuestion()">Submit</button>'
+                        }
+                        else if (questionType === "BOOLEAN"){
+                          answerBox.innerHTML += '<input class="TF" name="userAnswer" type="button" value="True" onclick="answerQuestion(true)">';
+                          answerBox.innerHTML += '<input class="TF" name="userAnswer" type="button" value="False" onclick="answerQuestion(false)">';
+                          ui.innerHTML += '<button id="skip-question" class="playBtn Black" onClick="skipQuestion()">Skip</button>';
+                        }
+                        else if (questionType === "MCQ"){
+                          answerBox.innerHTML += '<input class="TF" name="userAnswer" type="button" value="A" onclick="answerA()">';
+                          answerBox.innerHTML += '<input class="TF" name="userAnswer" type="button" value="B" onclick="answerB()">';
+                          answerBox.innerHTML += '<input class="TF" name="userAnswer" type="button" value="C" onclick="answerC()">';
+                          answerBox.innerHTML += '<input class="TF" name="userAnswer" type="button" value="D" onclick="answerD()">';
+                          ui.innerHTML += '<button id="skip-question" class="playBtn Black" onClick="skipQuestion()">Skip</button>';
+                        }
+                        else {
+                          answerBox.innerHTML += '<input id="questionBox" name="userAnswer">';
+                          ui.innerHTML += '<button id="skip-question" class="playBtn Black" onClick="skipQuestion()">Skip</button>';
+                          ui.innerHTML += '<button id="submit-answer" class="playBtn" onClick="answerQuestion()">Submit</button>';
+                          questionBox.setAttribute("type", questionType);
+                          questionBox.value = "";
+                        }
 
                         getScore();
                     }
@@ -78,6 +107,8 @@
                 if (jsonObject.status === "OK") 
                 {
                     alert (jsonObject.message);
+                    ui.innerHTML = "";
+                    answerBox.innerHTML = "";
                     loadQuestion();
                 }
                 else 
@@ -87,15 +118,18 @@
             })
         }
 
-        function answerQuestion()
+        // the way this works is that by default it looks for the id "questionBox", unless given a different value by calling the function with the parameter.
+        function answerQuestion(answer = document.getElementById("questionBox").value)
         {
-          let answer = document.getElementById("questionBox").value;
+            //let answer = document.getElementById("questionBox").value;
             fetch("https://codecyprus.org/th/api/answer?session=" + sessionID + "&answer=" + answer) 
             .then(response => response.json())
             .then(jsonObject => {
                 if (jsonObject.status === "OK") {
                     score += jsonObject.scoreAdjustment;
                     alert (jsonObject.message);
+                    ui.innerHTML ="";
+                    answerBox.innerHTML = "";
                     loadQuestion(sessionID);
                 }
                 else {
@@ -125,6 +159,19 @@
         function getLeaderboard() 
         {
             window.location.href = 'leaderboard.html?sessionID=' + sessionID;
+        }
+
+        function answerA(){
+          answerQuestion("A");
+        }
+        function answerB(){
+          answerQuestion("B");
+        }
+        function answerC(){
+          answerQuestion("C");
+        }
+        function answerD(){
+          answerQuestion("D");
         }
 
         loadQuestion();

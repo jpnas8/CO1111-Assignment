@@ -151,6 +151,16 @@ footer{
     margin: 0 auto;
 }
 
+#answerBox{
+    text-align: center;
+}
+
+.TF{
+    padding: 3% 10%;
+    display: inline-flex;
+    margin: 2%;
+}
+
 form {
     display: flex;
     flex-direction: column;
