@@ -10,14 +10,16 @@
 
 <div id="question-container">
   <div id="question">
-    <button id="leaderboard-button" class="link">Leaderboard</button>
+    <button id="leaderboard-button" class="link" onclick="getLeaderboard()">Leaderboard</button>
     <h2 id="questionHeader">Question </h2>
     <div id="score-container">
       <h2>Score: <span id="score">0</span></h2>
     </div>
   </div>
 </div>
+
   <div id="questionDiv"></div>
+
 <div id="UI">
   <input id="questionBox" name="userAnswer">
   <div id="options-container">
@@ -41,7 +43,7 @@
                     let isCompleted = jsonObject.completed;
                     if (!isCompleted) {
                         let UI = document.getElementById("UI");
-                        UI.hidden = false;
+                        UI.style.visibility = "visible";
 
                         let questionText = jsonObject.questionText;
                         let questionType = jsonObject.questionType;
@@ -130,16 +132,15 @@
             .then(jsonObject => {
                 if (jsonObject.status === "OK") {
                     let UI = document.getElementById("UI");
-                    UI.hidden= true;
+                    UI.style.visibility = "hidden";
 
                     let div = document.getElementById("questionDiv");
-                    div.innerHTML = "<table><tr><th>Player</th><th>Score</th><th>Time</th></tr>"
+                    div.innerHTML = "<table><tr><th>Player</th><th>Score</th><th>Time</th></tr>";
                     
                     for (let i = 0; i < jsonObject.numOfPlayers; i++) {
                         let player = jsonObject.leaderboard[i].player;
                         let score = jsonObject.leaderboard[i].score;
                         let time = jsonObject.leaderboard[i].completionTime;
-                        // console.log(player);
                         div.innerHTML += "<tr><td>"+player +"</td><td>"+score +"</td><td>" + time +"</td></tr>";
                     }
                     div.innerHTML += "</table>";
