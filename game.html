@@ -19,19 +19,20 @@
   </div>
 </div>
   <div id="questionDiv"></div>
-<form onsubmit="answerQuestion()">
-  <input id="questionBox" name="userAnswer">
+<form >
+  <input id="questionBox">
   <div id="options-container">
-    <button id="skip-question" class="playBtn black" type="submit">Skip</button>
-    <button id="submit-answer" class="playBtn" type="submit">Submit</button>
+    <button id="skip-question" class="playBtn black" onclick="skipQuestion()">Skip</button>
+    <button id="submit-answer" class="playBtn" onclick="answerQuestion()">Submit</button>
   </div>
 </form>
   
     <script>
         let params = new URLSearchParams(location.search);
         let sessionID = params.get("sessionID");
+        // what if we store sessionID in the session-storage/cookies so that we do not lose it
       
-        function loadQuestion() {
+        function loadQuestion(sessionID) {
             fetch("https://codecyprus.org/th/api/question?session="+ sessionID)
             .then(response => response.json())
             .then(jsonObject => {
@@ -47,7 +48,7 @@
 
                         currentQuestionIndex++;
                         let questionHeaderHTML = document.getElementById("questionHeader");
-                        questionHeaderHTML.innerHTML += currentQuestionIndex + ":";
+                        questionHeaderHTML.innerHTML = "Question " + currentQuestionIndex + ":";
                         let questionHTML = document.getElementById("questionDiv");
                         questionHTML.innerHTML = questionText;
                         let questionBox = document.getElementById("questionBox");
@@ -60,15 +61,16 @@
                 else {
                     alert (jsonObject.errorMessages);
                 }
-            })
+            });
         }
         
         function skipQuestion()
         {
-            fetch("https://codecyprus.org/th/api/skip?session=" +sessionID)
+            //fetch("https://codecyprus.org/th/api/skip?session=" +sessionID)
+          fetch("https://codecyprus.org/th/api/skip?session=" + sessionID)
             .then(response => response.json())
             .then(jsonObject => {
-                if (jsonObject.status === "OK") 
+                if (jsonObject.status === "OK" && jsonObject.canBeSkipped)
                 {
                     alert (jsonObject.message);
                     loadQuestion(sessionID);
@@ -77,13 +79,13 @@
                 {
                     alert (jsonObject.errorMessages);
                 }
-            })
+            });
         }
 
         function answerQuestion()
         {
           let answer = document.getElementById("questionBox").value;
-            fetch("https://codecyprus.org/th/api/answer?session=" + sessionID + "&answer=" + answer) 
+            fetch("https://codecyprus.org/th/api/answer?session=" + sessionID + "&answer=" + answer)
             .then(response => response.json())
             .then(jsonObject => {
                 if (jsonObject.status === "OK") {
@@ -115,7 +117,9 @@
             })
         }
 
-        loadQuestion();
+        loadQuestion(sessionID);
+        //TODO add statements to check the question type, and generate the input depending on the type of the question (jp)
+        // make a function for location, make a function for QR and make a function for
         
     </script>
 </body>
