@@ -188,3 +188,23 @@ form {
     font-size: 150%;
     margin-bottom: 2%;
 }
+
+#leaderboardContainer {
+    display: flex;
+    margin: 2%;
+    transition-duration: .5s;
+    font-size : 20px;
+    justify-content: center;
+    background-color: darkviolet;
+    padding: 1%;
+}
+
+#leaderboardTable {
+    width: 100%;
+    table-layout:fixed;
+    border: thin solid black;
+}
+
+#leaderboardTable tr{
+    border: thin solid black;
+}
