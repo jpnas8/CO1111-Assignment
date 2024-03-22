@@ -77,10 +77,10 @@
                           ui.innerHTML += '<button id="skip-question" class="playBtn Black" onClick="skipQuestion()">Skip</button>';
                         }
                         else if (questionType === "MCQ"){
-                          answerBox.innerHTML += '<input class="TF" name="userAnswer" type="button" value="A" onclick="answerA()">';
-                          answerBox.innerHTML += '<input class="TF" name="userAnswer" type="button" value="B" onclick="answerB()">';
-                          answerBox.innerHTML += '<input class="TF" name="userAnswer" type="button" value="C" onclick="answerC()">';
-                          answerBox.innerHTML += '<input class="TF" name="userAnswer" type="button" value="D" onclick="answerD()">';
+                          answerBox.innerHTML += '<input class="MCQ" name="userAnswer" type="button" value="A" onclick="answerA()">';
+                          answerBox.innerHTML += '<input class="MCQ" name="userAnswer" type="button" value="B" onclick="answerB()">';
+                          answerBox.innerHTML += '<input class="MCQ" name="userAnswer" type="button" value="C" onclick="answerC()">';
+                          answerBox.innerHTML += '<input class="MCQ" name="userAnswer" type="button" value="D" onclick="answerD()">';
                           ui.innerHTML += '<button id="skip-question" class="playBtn Black" onClick="skipQuestion()">Skip</button>';
                         }
                         else {

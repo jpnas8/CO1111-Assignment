@@ -169,6 +169,14 @@ footer{
     margin: 2%;
 }
 
+.MCQ{
+    padding: 2% 20%;
+    margin: 1% auto;
+    display: flex;
+    flex-direction: column;
+    font-size: xx-large;
+}
+
 form {
     display: flex;
     flex-direction: column;
