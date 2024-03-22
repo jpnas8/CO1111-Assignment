@@ -198,3 +198,13 @@ form {
     background-color: darkviolet;
     padding: 1%;
 }
+
+#leaderboardTable {
+    width: 100%;
+    table-layout:fixed;
+    border: thin solid black;
+}
+
+#leaderboardTable tr{
+    border: thin solid black;
+}

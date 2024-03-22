@@ -12,7 +12,9 @@
   </div>
 
   <div id="leaderboard-table">
-    <table><tr><th>Player</th><th>Score</th><th>Time</th></tr>
+    <table id="leaderboardTable"><tr><th>Player</th><th>Score</th><th>Time</th></tr>
+    
+    </table>
 
   </div>
 
@@ -29,18 +31,31 @@
         header.innerHTML += " | Leaderboard";
 
         let div = document.getElementById("leaderboard-table");
+        let table = document.getElementById("leaderboardTable");
         
         for (let i = 0; i < jsonObject.numOfPlayers; i++) {
           let player = jsonObject.leaderboard[i].player;
           let score = jsonObject.leaderboard[i].score;
           let time = jsonObject.leaderboard[i].completionTime;
-          div.innerHTML += "<tr><td>"+player +"</td><td>"+score +"</td><td>" + time +"</td></tr>";
+
+          let currentRow = table.insertRow(-1);
+
+          let column1 = currentRow.insertCell(0);
+          let column2 = currentRow.insertCell(1);
+          let column3 = currentRow.insertCell(2);
+      
+          column1.innerText = player
+          column2.innerText = score
+          column2.innerText = time
         }
-          div.innerHTML += "</table>";
-        }
-        else {
-          alert(jsonObject.errorMessages);
-        }
+          
+        //   div.innerHTML += "<tr><td>"+player +"</td><td>"+score +"</td><td>" + time +"</td></tr>";
+        // }
+        // div.innerHTML += "</table>";
+      }
+       else {
+         alert(jsonObject.errorMessages);
+      }
     })
 
 </script>
