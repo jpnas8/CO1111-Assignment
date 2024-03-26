@@ -78,7 +78,7 @@ footer{
 .playBtn:hover {
     transition-duration: .5s;
     background-color: mediumorchid;
-    padding: 2%;
+    /* padding: 2%; */
 }
 
 .black {
@@ -104,7 +104,7 @@ footer{
 .link:hover{
     transition-duration: 0.5s;
     background-color: white;
-    padding: 10px;
+    /* padding: 10px; */
     border-radius: 5px;
     color: purple;
     text-decoration: none;
@@ -130,7 +130,7 @@ footer{
 .THButton:hover{
     transition: 0.5s;
     background-color: mediumorchid;
-    padding: 3%;
+    /* padding: 3%; */
 }
 
 #names {

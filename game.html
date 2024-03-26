@@ -39,6 +39,7 @@
         let sessionID = params.get("sessionID");
         let ui = document.getElementById("options-container");
         let answerBox = document.getElementById("answerBox");
+        let isInt;
 
         function loadQuestion() {
             fetch("https://codecyprus.org/th/api/question?session="+ sessionID)
@@ -63,18 +64,19 @@
                         let questionHTML = document.getElementById("questionDiv");
                         questionHTML.innerHTML = questionText;
 
-
                         let questionBox = document.getElementById("questionBox");
                         if (questionType === "INTEGER") {
                           //TODO this part doesnt take only ONE digit
                           answerBox.innerHTML += '<input id="questionBox" name="userAnswer" type="number" min="-9" max="9" maxlength="1">';
                           ui.innerHTML += '<button id="skip-question" class="playBtn Black" onClick="skipQuestion()">Skip</button>';
-                          ui.innerHTML += '<button id="submit-answer" class="playBtn" onClick="answerQuestion()">Submit</button>'
+                          ui.innerHTML += '<button id="submit-answer" name="number" class="playBtn" onClick="answerQuestion()">Submit</button>';
+                          isInt = true;
                         }
                         else if (questionType === "BOOLEAN"){
                           answerBox.innerHTML += '<input class="TF" name="userAnswer" type="button" value="True" onclick="answerQuestion(true)">';
                           answerBox.innerHTML += '<input class="TF" name="userAnswer" type="button" value="False" onclick="answerQuestion(false)">';
                           ui.innerHTML += '<button id="skip-question" class="playBtn Black" onClick="skipQuestion()">Skip</button>';
+                          isInt = false;
                         }
                         else if (questionType === "MCQ"){
                           answerBox.innerHTML += '<input class="MCQ" name="userAnswer" type="button" value="A" onclick="answerA()">';
@@ -82,6 +84,7 @@
                           answerBox.innerHTML += '<input class="MCQ" name="userAnswer" type="button" value="C" onclick="answerC()">';
                           answerBox.innerHTML += '<input class="MCQ" name="userAnswer" type="button" value="D" onclick="answerD()">';
                           ui.innerHTML += '<button id="skip-question" class="playBtn Black" onClick="skipQuestion()">Skip</button>';
+                          isInt = false;
                         }
                         else {
                           answerBox.innerHTML += '<input id="questionBox" name="userAnswer">';
@@ -89,8 +92,8 @@
                           ui.innerHTML += '<button id="submit-answer" class="playBtn" onClick="answerQuestion()">Submit</button>';
                           questionBox.setAttribute("type", questionType);
                           questionBox.value = "";
+                          isInt = false;
                         }
-
                         getScore();
                     }
                     else {
@@ -106,6 +109,7 @@
         
         function skipQuestion()
         {
+          if (confirm("This question will be skipped. Continue?")== true) {
             fetch("https://codecyprus.org/th/api/skip?session=" +sessionID)
             .then(response => response.json())
             .then(jsonObject => {
@@ -121,12 +125,16 @@
                     alert (jsonObject.errorMessages);
                 }
             })
+          }
         }
 
         // the way this works is that by default it looks for the id "questionBox", unless given a different value by calling the function with the parameter.
         function answerQuestion(answer = document.getElementById("questionBox").value)
-        {
-            //let answer = document.getElementById("questionBox").value;
+        { 
+          if (isInt && !(Number.isInteger(Number(answer)))) {
+            alert("Please provide an integer number!");
+          }
+          else {
             fetch("https://codecyprus.org/th/api/answer?session=" + sessionID + "&answer=" + answer) 
             .then(response => response.json())
             .then(jsonObject => {
@@ -142,6 +150,7 @@
                     getLeaderboard();
                 }
             })
+          }
         }
 
         function getScore()
