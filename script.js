@@ -29,7 +29,8 @@ function loadTreasureHunts(){
                     treasures.innerHTML += '<br>'
                 }
                 else {
-                    treasures.innerHTML += `<button onclick="location.href='startTreasureHunt.html?treasureHuntID=${treasureHuntID=treasureHunt.uuid}&name=${treasureHunt.name}'" class="THButton" type="button" disabled> ${treasureHunt.name}</button>`;
+                    treasures.innerHTML += `<button onclick="location.href='startTreasureHunt.html?treasureHuntID=${treasureHuntID = treasureHunt.uuid}&name=${treasureHunt.name}'" class="THButton" type="button" disabled xmlns="http://www.w3.org/1999/html"> ${treasureHunt.name}
+                                            <div style="color: crimson; font-size: small"><br>This treasure hunt is not available!</div</button>`;
                     treasures.innerHTML += '<br>'
                 }
             });
