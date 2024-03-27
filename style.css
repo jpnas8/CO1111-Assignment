@@ -50,13 +50,16 @@ footer{
 #names {
     text-align: left;
     padding: 20px;
+    font-size: 10vw;
 }
 #goal {
     padding: 1%;
+    text-align: center;
 }
 #game_explanation {
     padding: 1%;
     line-height: 1.5;
+    text-align: center;
 }
 #game_rules {
     padding: 1%;
