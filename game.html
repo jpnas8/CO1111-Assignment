@@ -5,12 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Game</title>
   <link rel="stylesheet" href="style.css">
+  <script src="instascan.min.js"></script>
 </head>
 <body id="gamesbody">
 
 <div id="question-container">
   <div id="question">
+    <div id="camSec">
     <button id="leaderboard-button" class="link" onclick="getLeaderboard()">Leaderboard</button>
+    <button id="camLink" class="link" onclick="scannerQR()">Camera</button>
+    </div>
     <h2 id="questionHeader">Question </h2>
     <div id="score-container">
       <h2>Score: <span id="score">0</span></h2>
@@ -28,6 +32,7 @@
     <!--<button id="skip-question" class="playBtn black" onclick="skipQuestion()">Skip</button>
     <button id="submit-answer" class="playBtn" onclick="answerQuestion()">Submit</button>-->
   </div>
+  <video id="preview"></video>
 </div>
 
 <footer id=" gamefooter">
@@ -221,6 +226,36 @@
           else{
             alert("Browser does not support location");
           }
+        }
+
+        function fcd(scanner){
+          scanner.exit();
+        }
+
+        function scannerQR(){
+
+          let division = document.getElementById("camSec");
+          let opts = {
+            continuous:true,
+            video: document.getElementById("preview"),
+            mirror: true,
+            captureImage: false,
+            backgroundScan: true,
+            refractoryPeriod: 5000,
+            scanPeriod: 1
+          };
+          let scanner = new Instascan.Scanner(opts);
+
+          Instascan.Camera.getCameras().then(function (cameras) {
+            division.innerHTML += '<button id="camExit" className="link" onClick="window.location.reload()">Close camera</button>';
+            if (cameras.length > 0) {
+              scanner.start(cameras[0]);
+
+            }
+            else {
+              console.error('No cameras found.');
+              alert("No cameras found.");}
+          }).catch(function (e) {console.error(e);});
         }
 
         function answerA(){
