@@ -94,6 +94,12 @@
                           isInt = false;
                         }
                         getScore();
+
+                        if (requiresLocation === true){
+                          geolocation();
+                          setInterval(geolocation, 32000);
+                        }
+
                     }
                     else {
                         getLeaderboard();
@@ -194,6 +200,27 @@
                 }
             })*/
           window.location.href = 'leaderboard.html?sessionID=' + sessionID;
+        }
+
+        function returnLocation(position){
+          fetch("https://codecyprus.org/th/api/location?session=" + sessionID + "&latitude="+ position.coords.latitude +"&longitude=" + position.coords.longitude + "")
+                  .then(response => response.json())
+                  .then(jsonObject =>{
+                    if (jsonObject.status === "OK"){
+                      alert(jsonObject.message);
+                    }
+                    else{
+                      alert(jsonObject.errorMessages);
+                    }
+                  });
+        }
+        function geolocation(){
+          if (navigator.geolocation){
+              navigator.geolocation.getCurrentPosition(returnLocation);
+          }
+          else{
+            alert("Browser does not support location");
+          }
         }
 
         function answerA(){
