@@ -130,10 +130,8 @@
         // the way this works is that by default it looks for the id "questionBox", unless given a different value by calling the function with the parameter.
         function answerQuestion(answer = document.getElementById("questionBox").value)
         { 
-          if (isInt){
-            if (!(Number.isInteger(Number(answer))) || (answer.includes(",") || answer.includes("."))) {
-              alert("Please provide an integer number!");
-            }
+          if (isInt && (!(Number.isInteger(Number(answer))) || (answer.includes(",") || answer.includes(".")))){
+            alert("Please provide an integer number!");
           }
           else {
             fetch("https://codecyprus.org/th/api/answer?session=" + sessionID + "&answer=" + answer) 
