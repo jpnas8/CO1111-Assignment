@@ -32,6 +32,7 @@
     <!--<button id="skip-question" class="playBtn black" onclick="skipQuestion()">Skip</button>
     <button id="submit-answer" class="playBtn" onclick="answerQuestion()">Submit</button>-->
   </div>
+  <div id="content">QR: </div>
   <video id="preview"></video>
 </div>
 
@@ -232,9 +233,15 @@
           scanner.exit();
         }
 
+        let printed = false;
         function scannerQR(){
-
           let division = document.getElementById("camSec");
+          if (printed === false) {
+            division.innerHTML += '<button id="camExit" className="link" onClick="window.location.reload()">Close camera</button>';
+            printed = true;
+          }
+
+
           let opts = {
             continuous:true,
             video: document.getElementById("preview"),
@@ -247,7 +254,6 @@
           let scanner = new Instascan.Scanner(opts);
 
           Instascan.Camera.getCameras().then(function (cameras) {
-            division.innerHTML += '<button id="camExit" className="link" onClick="window.location.reload()">Close camera</button>';
             if (cameras.length > 0) {
               scanner.start(cameras[0]);
             }
@@ -255,6 +261,10 @@
               console.error('No cameras found.');
               alert("No cameras found.");}
           }).catch(function (e) {console.error(e);});
+
+          scanner.addListener('scan', function (content) {
+            document.getElementById("content").innerHTML += content;
+          });
         }
 
         function answerA(){

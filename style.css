@@ -251,3 +251,18 @@ form {
 #leaderboardTable tr{
     border: thin solid black;
 }
+
+#preview{
+    margin: auto;
+    width: 720px;
+    height: 480px;
+}
+
+#content{
+    margin: auto 40%;
+    padding: 20px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    display: block;
+}
