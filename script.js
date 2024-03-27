@@ -3,21 +3,7 @@ let playerName;
 let teamName;
 let treasures = document.getElementById("TH")
 loadTreasureHunts();
-/*function getInfo(){
-    fetch("https://codecyprus.org/th/api/list")
-        .then(response =>response.json())
-        .then(jsonObject =>{
-            console.log(jsonObject);
-            let treasureHunts = jsonObject.treasureHunts;
-            for(let i=0; i<treasureHunts.length;i++){
-                //treasures.innerHTML += treasureHunts[i].name;
 
-                treasures.innerHTML += '<button class="THButton" type="button">' + treasureHunts[i].name + ' </button>';
-                treasures.innerHTML += '<br>'
-
-            }
-        });
-}*/
 function loadTreasureHunts(){
     fetch("https://codecyprus.org/th/api/list")
         .then(response=>response.json())
@@ -32,8 +18,20 @@ function loadTreasureHunts(){
                 listItem.type = "button";
                 listItem.innerHTML += '<br>';
                 treasures.appendChild(listItem);*/
-                treasures.innerHTML += `<button onclick="location.href='startTreasureHunt.html?treasureHuntID=${treasureHuntID=treasureHunt.uuid}&name=${treasureHunt.name}'" class="THButton" type="button"> ${treasureHunt.name}</button>`;
-                treasures.innerHTML += '<br>'
+                let startsOn = treasureHunt.startsOn;
+                let endsOn = treasureHunt.endsOn;
+                let startStamp = new Date(startsOn);
+                let endStamp = new Date(endsOn);
+                let currentDate = new Date();
+
+                if (!(endStamp < currentDate) && !(startStamp > currentDate)){
+                    treasures.innerHTML += `<button onclick="location.href='startTreasureHunt.html?treasureHuntID=${treasureHuntID=treasureHunt.uuid}&name=${treasureHunt.name}'" class="THButton" type="button"> ${treasureHunt.name}</button>`;
+                    treasures.innerHTML += '<br>'
+                }
+                else {
+                    treasures.innerHTML += `<button onclick="location.href='startTreasureHunt.html?treasureHuntID=${treasureHuntID=treasureHunt.uuid}&name=${treasureHunt.name}'" class="THButton" type="button" disabled> ${treasureHunt.name}</button>`;
+                    treasures.innerHTML += '<br>'
+                }
             });
         })
         .catch(error => console.error('Error loading treasure hunts: ', error));
