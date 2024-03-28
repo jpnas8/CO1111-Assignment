@@ -41,11 +41,6 @@ footer{
     flex-direction: column;
 }
 
-#logo {
-    float: left;
-    height: 60px;
-    padding: 10px
-}
 
 #names {
     text-align: left;
@@ -263,6 +258,12 @@ form {
     padding: 20px;
     background-color: black;
     color: white;
+    text-align: center;
+    display: block;
+}
+
+.twitter-timeline{
+    margin: 30% ;
     text-align: center;
     display: block;
 }
